@@ -206,12 +206,32 @@ public class ReadFromFile {
         }
     }
 
+    public static void traverseFolder(String path) {
+        File file = new File(path);
+        if(file.exists()) {
+            File[] files = file.listFiles();
+            if(null == files || files.length ==0) {
+                System.out.println("file is empty.");
+            }else {
+                for(File file1 : files) {
+                    if(file1.isDirectory()) {
+                        traverseFolder(file1.getAbsolutePath());
+                    } else {
+                        System.out.println("file is:" + file1.getAbsolutePath());
+                    }
+                }
+            }
+        }
+    }
+
     public static void main(String[] args) {
-        String fileName = "C:/temp/newTemp.txt";
+        /*String fileName = "C:/temp/newTemp.txt";
         ReadFromFile.readFileByBytes(fileName);
         ReadFromFile.readFileByChars(fileName);
         ReadFromFile.readFileByLines(fileName);
         ReadFromFile.readFileByRandomAccess(fileName);
-        ReadFromFile.largeFileIO(fileName, "C:/temp/outNewTemp.txt");
+        ReadFromFile.largeFileIO(fileName, "C:/temp/outNewTemp.txt");*/
+
+        ReadFromFile.traverseFolder("C:/temp");
     }
 }
